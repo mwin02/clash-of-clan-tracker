@@ -2,7 +2,7 @@ import Image from "next/image";
 import ClanSummary from "./ui/ClanSummary";
 import ClanWar from "./ui/ClanWar";
 import ClanRaid from "./ui/ClanRaid";
-export const revalidate = 300;
+export const revalidate = 60;
 
 export default function Home() {
   return (

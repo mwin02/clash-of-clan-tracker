@@ -35,6 +35,9 @@ export default async function ClanWar({
   const startTime = new Date(convertTime(warData.startTime));
   const endTime = new Date(convertTime(warData.endTime));
 
+  let memberList = warData.clan.members;
+  memberList.sort((a: any, b: any) => a.mapPosition - b.mapPosition);
+
   return (
     <>
       <h2>Current War State</h2>
@@ -47,6 +50,7 @@ export default async function ClanWar({
       <table>
         <thead>
           <tr>
+            <th></th>
             <th>Name</th>
             <th>Town Hall Level</th>
             <th>Attacks</th>
@@ -55,7 +59,7 @@ export default async function ClanWar({
           </tr>
         </thead>
         <tbody>
-          {warData.clan.members.map((member: any) => {
+          {memberList.map((member: any, index: number) => {
             let attackInfo;
             let attackNumber = 0;
             if (member.attacks) {
@@ -72,6 +76,7 @@ export default async function ClanWar({
 
             return (
               <tr key={member.tag}>
+                <td>{index + 1}</td>
                 <td>{member.name}</td>
                 <td>TH {member.townhallLevel}</td>
                 <td>{`${attackNumber}/2`}</td>
