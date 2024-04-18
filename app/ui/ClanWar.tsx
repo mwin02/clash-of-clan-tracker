@@ -52,19 +52,22 @@ export default async function ClanWar({
           <tr>
             <th></th>
             <th>Name</th>
-            <th>Town Hall Level</th>
+            <th>Town Hall</th>
             <th>Attacks</th>
-            <th></th>
-            <th></th>
+            <th>Stars Obtained</th>
+            <th>Attack 1</th>
+            <th>Attack 2</th>
           </tr>
         </thead>
         <tbody>
           {memberList.map((member: any, index: number) => {
             let attackInfo;
             let attackNumber = 0;
+            let starCount = 0;
             if (member.attacks) {
               attackNumber = member.attacks.length;
               attackInfo = member.attacks.map((attack: any, index: number) => {
+                starCount += attack.stars;
                 return (
                   <td key={`${attack.attackerTag}${index}`}>
                     Attack #{index + 1} : {attack.stars}/3{" "}
@@ -80,6 +83,7 @@ export default async function ClanWar({
                 <td>{member.name}</td>
                 <td>TH {member.townhallLevel}</td>
                 <td>{`${attackNumber}/2`}</td>
+                <td>{`${starCount}/6`}</td>
                 {attackInfo}
               </tr>
             );

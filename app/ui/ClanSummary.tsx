@@ -28,15 +28,19 @@ export default async function ClanSummary({
   clanTag: string;
 }>) {
   const clanData = await getData(clanTag);
+  let clanMemberList = clanData.memberList;
+  clanMemberList.sort((a: any, b: any) => b.trophies - a.trophies);
   return (
     <section>
-      <h2>{clanData.name}</h2>
-      <Image
-        src="https://api-assets.clashofclans.com/badges/512/Yd3-BjJF34wAm1c3X0FFHgpY4s98QQh3SR84f4jGGo4.png"
-        width={50}
-        height={50}
-        alt="Clan Logo"
-      />
+      <h2>
+        <Image
+          src={clanData.badgeUrls.medium}
+          width={50}
+          height={50}
+          alt="Clan Logo"
+        />
+        {clanData.name}
+      </h2>
       <table>
         <thead>
           <tr>

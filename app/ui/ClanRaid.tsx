@@ -32,6 +32,10 @@ export default async function ClanRaid({
   const raidData = raids.items[0];
   const startTime = new Date(convertTime(raidData.startTime));
   const endTime = new Date(convertTime(raidData.endTime));
+  let memberRaids = raidData.members;
+  memberRaids.sort(
+    (a: any, b: any) => b.capitalResourcesLooted - a.capitalResourcesLooted
+  );
   return (
     <section>
       <h2>Current Raid State</h2>
@@ -48,7 +52,7 @@ export default async function ClanRaid({
           </tr>
         </thead>
         <tbody>
-          {raidData.members.map((member: any) => {
+          {memberRaids.map((member: any) => {
             return (
               <tr key={member.tag}>
                 <td>{member.name}</td>
